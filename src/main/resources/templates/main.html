@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <meta http-equiv="refresh" content="3;url=http://localhost:8080/allproduct" />
+
+    <style>
+        html {
+            --black: #000;
+            --white: #fff;
+            --brown: #a67d52;
+            --light-brown: #c69c6a;
+            --light-blue: #d6ecfd;
+        }
+
+        body {
+            background-color: var(--light-blue);
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: "Roboto", sans-serif;
+        }
+        .content {
+            display: flex;
+            justify-content: center;
+        }
+
+        .head,
+        .left_arm,
+        .torso,
+        .right_arm,
+        .left_leg,
+        .right_leg,
+        .left_ear,
+        .right_ear {
+            background-color: var(--brown);
+        }
+
+        .head {
+            width: 280px;
+            margin: 0 auto;
+            height: 200px;
+            border-radius: 200px 200px 0 0;
+            margin-bottom: -30px;
+        }
+
+        .head-content {
+            padding-top: 75px;
+        }
+
+        .eyes,
+        .ears {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .ears {
+            position: relative;
+            z-index: -1;
+            top: 80px;
+            width: 280px;
+            margin: auto;
+        }
+
+        .left_ear,
+        .right_ear {
+            width: 85px;
+            height: 85px;
+            border-radius: 100%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .left_ear {
+            transform: rotate(-45deg);
+            right: 18px;
+        }
+
+        .right_ear {
+            transform: rotate(45deg);
+            left: 18px;
+        }
+
+        .left_ear-content,
+        .right_ear-content {
+            background: var(--light-brown);
+            width: 60px;
+            height: 60px;
+            border-radius: 100%;
+            position: relative;
+        }
+
+        .eyes {
+            padding: 0 35px;
+            top: 20px;
+            position: relative;
+        }
+
+        .left_eye,
+        .right_eye {
+            width: 24px;
+            height: 24px;
+            border-radius: 100%;
+            background-color: var(--black);
+        }
+
+        .nose {
+            position: relative;
+            top: -5px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            border-radius: 100%;
+            background: var(--light-brown);
+        }
+
+        .nose-content {
+            width: 30px;
+            height: 25px;
+            border-radius: 100%;
+            background: var(--black);
+        }
+
+
+
+        .left_arm,
+        .right_arm,
+        .left_leg,
+        .right_leg {
+            width: 54px;
+            height: 70px;
+            border-radius: 100px;
+        }
+
+        .left_leg,
+        .right_leg {
+            border-radius: 0 0 100px 100px;
+        }
+
+        .left_arm,
+        .right_arm {
+            position: relative;
+            top: -20px;
+        }
+
+        .left_arm {
+            left: 15px;
+            transform: rotate(100deg);
+        }
+
+        .right_arm {
+            right: 15px;
+            transform: rotate(-100deg);
+        }
+
+        .torso {
+            width: 280px;
+            height: 130px;
+            border-radius: 0 0 60px 60px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .torso-content {
+            width: 70%;
+            height: 90px;
+            margin-top: 15px;
+            background: var(--light-brown);
+            border-radius: 20px 20px 60px 60px;
+        }
+
+        .lower_body {
+            width: calc(280px - 60px);
+            height: 90px;
+            margin: -20px auto 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .left_leg:hover {
+            transform: rotate(20deg);
+        }
+
+        .right_leg:hover {
+            -webkit-transform: rotate(-20deg);
+            -moz-transform: rotate(-20deg);
+            -o-transform: rotate(-20deg);
+            -ms-transform: rotate(-20deg);
+            transform: rotate(-20deg);
+        }
+
+    </style>
+
+
+</head>
+<body>
+<div class="content">
+    <h1>Hello, <td th:text="${username}"> </td>!</h1>
+    <div class="bear">
+        <div class="ears">
+            <div class="left_ear">
+                <div class="left_ear-content"></div>
+            </div>
+            <div class="right_ear">
+                <div class="right_ear-content"></div>
+            </div>
+        </div>
+        <div class="head">
+            <div class="head-content">
+                <div class="eyes">
+                    <div class="left_eye"></div>
+                    <div class="right_eye"></div>
+                </div>
+                <div class="nose">
+                    <div class="nose-content"></div>
+                </div>
+            </div>
+
+        </div>
+        <div class="upper_body">
+            <div class="left_arm"></div>
+            <div class="torso">
+                <div class="torso-content"></div>
+            </div>
+            <div class="right_arm"></div>
+        </div>
+        <div class="lower_body">
+            <div class="left_leg"></div>
+            <div class="right_leg"></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>

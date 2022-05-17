@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+
+    <style>
+    {
+    margin: 0;
+    padding: 0;
+    }
+    .rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+    }
+    .rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+    }
+    .rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+    }
+    .rate:not(:checked) > label:before {
+    content: '★ ';
+    }
+    .rate > input:checked ~ label {
+    color: #ffc700;
+    }
+    .rate:not(:checked) > label:hover,
+    .rate:not(:checked) > label:hover ~ label {
+    color: #deb217;
+    }
+    .rate > input:checked + label:hover,
+    .rate > input:checked + label:hover ~ label,
+    .rate > input:checked ~ label:hover,
+    .rate > input:checked ~ label:hover ~ label,
+    .rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+    }
+
+    </style>
+
+
+
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <title>Star rating using pure CSS</title>
+    </head>
+
+<body>
+
+</body>
+
+</html>
+
+
+
+</head>
+<body>
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">Thymeleaf - Bootstrap Table</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <td> <p align="right">  <a href="/account"> Your Account </a> </p></td>
+                    <a class="nav-link" href="#">
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Sign Out"/>
+                </form>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 mt-5 mb-5">
+
+                <tbody>
+                <table id="example" class="table table-bordered" style="width: 100%">
+
+                <tr th:each="i : ${orders}">
+                    <td th:text="${i.id}">  ID</td>
+                    <td th:text="${i.user.username}">Product Name</td>
+                    <td th:text="'$' + ${#numbers.formatDecimal(i.price, 0, 'COMMA', 2, 'POINT')}">Price</td>
+                    <td th:text="${i.date}">Product Manufactory</td>
+                    <td>
+                    <p th:each="j: ${i.productList}">
+                        <span  th:text="${j.name}"> </span>
+                        <span th:text="${j.price}"></span>
+                        <span th:text="${j.productManufactory}"> </span>
+
+
+                        <!--   <form th:action="@{/rating/{id}(id=${j.id})}" method="post">
+                          <p   align="left">   <button class="block">  Product  </button> </p>
+                          </form> // не получается сделать продукт в кнопку  -->
+                          <a th:href="@{/rating/{id}(id=${j.id})}" >   Product</a>
+
+                      <!--  <input type="radio" id="star5" name="rate" value="5" />
+                            <label for="star5" title="text">5 stars</label>
+                            <input type="radio" id="star4" name="rate" value="4" />
+                            <label for="star4" title="text">4 stars</label>
+                            <input type="radio" id="star3" name="rate" value="3" />
+                            <label for="star3" title="text">3 stars</label>
+                            <input type="radio" id="star2" name="rate" value="2" />
+                            <label for="star2" title="text">2 stars</label>
+                            <input type="radio" id="star1" name="rate" value="1" />
+                            <label for="star1" title="text">1 star</label>
+                             // закоментил оценки в аккаунте так как они там не нужны и выводились не так как нужно
+                             -->
+                    </span>
+                    </p>
+                    </td>
+                </tr>
+                </table>
+                </tbody>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>

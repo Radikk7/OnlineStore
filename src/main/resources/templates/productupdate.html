@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Spring Boot Thymeleaf Application - Bootstrap Table</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+</head>
+<body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">Thymeleaf - Bootstrap Table</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <td> <p align="right">  <a href="/account"> Your Account </a> </p></td>
+                    <a class="nav-link" href="#">
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Sign Out"/>
+                </form>
+            </ul>
+        </div>
+    </div>
+</nav>
+<th:block th:each="i : ${productup}">
+<h1>ADD PRODUCT </h1>
+<form th:action="@{/updateproduct}" method="post" enctype="multipart/form-data">
+
+    <div class="container p-0">
+        <div class="card px-4">
+            <p class="h8 py-3">Product Update</p>
+            <div class="row gx-3">
+                <div class="col-4">
+                    <div class="d-flex flex-column">
+                        <td class="text mb-1">id <input class="form-control mb-3" type="text" th:value="${i.id}" name="id"> </td>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="d-flex flex-column">
+                      <td   class="text mb-1">productname <input class="form-control mb-3" type="text" th:value="${i.name}" name="name" > </td><br>
+                    </div>
+                </div><br>
+                <div class="col-4">
+                    <div class="d-flex flex-column">
+                        <td class="text mb-1">price <input class="form-control mb-3" type="text" th:value="${i.price}" name="price"> </td>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="d-flex flex-column">
+                        <td class="text mb-1">description <input class="form-control mb-3" type="text" th:value="${i.description}" name="description"> </td>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="d-flex flex-column">
+                        <td> <img th:src="@{/img/{filename}(filename = ${i.filename})}"  width="250" height="350"> </td>
+                        <!-- <p class="text mb-1">file</p> <input class="form-control-file" type="file" th:value="${i.file}" name="file"> -->
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="d-flex flex-column">
+                        <p class="text mb-1">file</p> <input class="form-control-file" type="file"  name="file">
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="d-flex flex-column">
+                        <p class="text mb-1">productmanufactory</p> <input class="form-control mb-3" type="text" th:value="${i.productManufactory}" name="productmanufactory">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="d-flex flex-column">
+                        <p class="text mb-1">rating</p> <input class="form-control mb-3" type="text" name="rating">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p> ProductType: <select name="productype">
+        <option id="option-1">  Phones&Accessories </option>
+        <option id="option-2">  TV, Blu-ray & Home_Cinema </option>
+        <option id="option-3">  Laptops </option>
+        <option id="option-4">  Software </option>
+        <option id="option-5">  Audio & HiFi_Systems </option>
+        <option id="option-6">  Headphones & Earphones </option>
+        <option id="option-7">  PC and Video Games </option>
+        <option id="option-8">  Tablets </option>
+    </select></p>
+
+
+    <div class="col-12">
+        <div class="btn btn-primary mb-3">
+            <input type="submit" value="Enter">  <span class="fas fa-arrow-right"></span> </div>
+    </div>
+
+
+    <!--  <input type="submit" name="enter">Enter</input> -->
+</form>
+
+
+</th:block>
+
+
+
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+</body>
+
+
+</html>

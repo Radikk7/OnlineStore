@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+
+    <style>
+
+        #option-1 {
+            color: red;
+        }
+        #option-2 {
+            color: green;
+        }
+
+        #option-3 {
+            color: yellow;
+        }
+
+        #option-4 {
+            color: blue;
+        }
+
+        #option-5 {
+            color: #33FFBB;
+        }
+        #option-6 {
+            color: #FF33F3;
+        }
+        #option-7 {
+            color: #FFCA33;
+        }
+        #option-8 {
+            color: #DAFF33;
+        }
+
+    </style>
+
+
+
+</head>
+<body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+
+<h1>ADD PRODUCT </h1>
+<form th:action="@{/addproduct}" method="post" enctype="multipart/form-data">
+
+    <div class="container p-0">
+        <div class="card px-4">
+            <p class="h8 py-3">ADD PRODUCT</p>
+            <div class="row gx-3">
+                <div class="col-4">
+                    <div class="d-flex flex-column">
+                        <p class="text mb-1">productname</p> <input class="form-control mb-3" type="text" name="productname" > <br>
+                    </div>
+                </div><br>
+                <div class="col-4">
+                    <div class="d-flex flex-column">
+                        <p class="text mb-1">price</p> <input class="form-control mb-3" type="text" name="price">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="d-flex flex-column">
+                        <p class="text mb-1">description</p> <input class="form-control mb-3" type="text" name="description">
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="d-flex flex-column">
+                        <p class="text mb-1">file</p> <input class="form-control-file" type="file" name="file">
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="d-flex flex-column">
+                        <p class="text mb-1">productmanufactory</p> <input class="form-control mb-3" type="text" name="productmanufactory">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="d-flex flex-column">
+                        <p class="text mb-1">rating</p> <input class="form-control mb-3" type="text" name="rating">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+  <!--  <input type="text" name="productname" placeholder="productname">Productname <br>
+    <input type="text" name="price" placeholder="price">Price <br>
+    <input type="text" name="description" placeholder="description">Description  <br>
+    <input type="text" name="productmanufactory" placeholder="productmanufactory">ProductManufactory <br>
+    <input type="text" name="rating" placeholder="rating">Rating<br> -->
+    <p> ProductType: <select name="productype">
+        <option id="option-1">  Phones&Accessories </option>
+        <option id="option-2">  TV, Blu-ray & Home_Cinema </option>
+        <option id="option-3">  Laptops </option>
+        <option id="option-4">  Software </option>
+        <option id="option-5">  Audio & HiFi_Systems </option>
+        <option id="option-6">  Headphones & Earphones </option>
+        <option id="option-7">  PC and Video Games </option>
+        <option id="option-8">  Tablets </option>
+    </select></p>
+
+
+    <div class="col-12">
+        <div class="btn btn-primary mb-3">
+            <input type="submit" value="Enter">  <span class="fas fa-arrow-right"></span> </div>
+    </div>
+
+
+  <!--  <input type="submit" name="enter">Enter</input> -->
+</form>
+<table cellpadding="10">
+    <tr>
+        <th>id</th>
+        <th>Name</th>
+    </tr>
+    <th:block th:each="i : ${listmanufactory}">
+        <tr>
+            <td th:text="${i.id}">...</td>
+            <td th:text="${i.name}">...</td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Spring Boot Thymeleaf Application - Bootstrap Table</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <style>
+        .pagination {
+            display: inline-block;
+        }
+
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+
+        .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .pagination a:hover:not(.active) {background-color: #ddd;}
+    </style>
+
+
+</head>
+<body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">Thymeleaf - Bootstrap Table</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                   <td> <p align="right">  <a href="/account"> Your Account </a> </p></td>
+                    <a class="nav-link" href="#">
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Sign Out"/>
+                </form>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 mt-5 mb-5">
+            <p align="left">   <p th:text="'Hello, ' + ${username} + '!'" />    </p>
+            <p align="right">  <a href="/allproduct/basket"> Open Basket </a> </p>
+            <table id="example" class="table table-bordered" style="width: 100%">
+                <thead>
+                <tr>
+                    <th>id <a href="/allproduct?sort=up&fild=id"> UP </a> <a href="/allproduct?sort=down&fild=id"> Down</a> </th>
+                    <th>Product Name </th>
+                    <th>Price <a href="/allproduct?sort=up&fild=price"> UP </a> <a href="/allproduct?sort=down&fild=price"> Down</a> </th>
+                    <th>Product Manufactory </th>
+                    <th>Rating </th>
+                    <th>Count Review</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="i : ${Product}">
+                    <td th:text="${i.id}">  ID</td>
+                    <td th:text="${i.name}">Product Name</td>
+                    <td th:text="'$' + ${#numbers.formatDecimal(i.price, 0, 'COMMA', 2, 'POINT')}">Price</td>
+                    <td th:text="${i.productManufactory}">Product Manufactory</td>
+                    <td th:text="${i.value}">Rating</td>
+                    <td th:text="${i.count}">Count review</td>
+                    <td> <a th:href="@{/allproduct/addtobasket/{id}(id=${i.id})}">Add to Basket </a></td>
+                    <td> <a th:href="@{/description/about/{id}(id=${i.id})}">view</a> </td>
+                </tr>
+                </tbody>
+            </table>
+
+
+
+            <h2>Active and Hoverable Pagination</h2>
+
+            <p>Move the mouse over the numbers.</p>
+
+
+
+            <div class="pagination">
+                <a href="">&laquo;</a>
+               <!-- <a class="active" href="#">1</a> -->
+                <a href="/allproduct?page=1" n>1</a>
+                <a th:href="@{/allproduct?page=2}" n>2</a>
+                <a th:href="@{/allproduct?page=3}" n>3</a>
+                <a th:href="@{/allproduct?page=4}" n>4</a>
+                <a th:href="@{/allproduct?page=5}" n>5</a>
+                <a th:href="@{/allproduct?page=6}" n>6</a>
+                <a href="#">&raquo;</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+<script>
+
+
+</script>
+
+ </body>
+</html>
